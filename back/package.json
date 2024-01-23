@@ -1,0 +1,38 @@
+{
+  "name": "api_pokemon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "dev": "ts-node-dev -r dotenv/config src/index.ts",
+    "lint": "ts-standard"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.5",
+    "morgan": "^1.10.0",
+    "prisma": "^5.8.1",
+    "ts-node-dev": "^2.0.0",
+    "ts-standard": "^12.0.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.8.1",
+    "@types/morgan": "^1.9.9",
+    "dotenv": "^16.3.2",
+    "express": "4.18.2"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project": "./back/tsconfig.json"
+    },
+    "extends": [
+      "./node_modules/ts-standard/eslintrc.json"
+    ]
+  }
+}
