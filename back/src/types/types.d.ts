@@ -11,6 +11,18 @@ export interface PokemonData {
   evolution: Evolution
   genderRatio: string
 }
+export interface createPokemon {
+  name: string
+  height: number
+  weight: number
+  abilities: string[]
+  description: string
+  frontImage: string
+  types: string[]
+  eggGroups: string[]
+  evolution: Evolution
+  genderRatio: number
+}
 
 export interface Evolution {
   name: string
@@ -37,4 +49,8 @@ export interface PokemonDataToDb {
   }
   genderRatio: number
   image: string
+}
+export interface createTeam {
+  name: string
+  pokemons: number[]
 }

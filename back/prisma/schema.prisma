@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Pokemon {
-  id        Int      @id 
+  id        Int      @id @default(autoincrement())
   name String
   types  String[]  
   description String
@@ -23,13 +23,13 @@ model Pokemon {
   evolutions Json
   image String
   teamId    Int?  
-  team      Team?    @relation(fields: [teamId], references: [id]) 
+
 }
 
 model Team {
   id        Int      @id @default(autoincrement())
   name      String
-  pokemons  Pokemon[] 
+  pokemons  Int[] 
 }
 model Types {
   id Int @id @default(autoincrement())
