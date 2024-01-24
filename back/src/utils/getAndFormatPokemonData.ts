@@ -17,7 +17,38 @@ export default async function getAndFormatPokemonData(): Promise<
     pokemonDataArray = await Promise.all(
       pokemonsUrls.map(async (url: string) => {
         const response = await axios.get(url)
-
+        let evolutionName = await axios
+          .get(response.data.species.url)
+          .then(async (res) => {
+            let evolutionChain: any = res.data.evolution_chain
+            let evolutionData: any = await axios
+              .get(evolutionChain.url)
+              .then((res) => {
+                return res.data.chain.evolves_to.length
+                  ? {
+                      name: res.data.chain.evolves_to[0].species.name,
+                      trigger: res.data.chain.evolves_to[0].evolution_details
+                        .length
+                        ? res.data.chain.evolves_to[0].evolution_details[0]
+                            .trigger.name
+                        : null,
+                    }
+                  : null
+              })
+            return evolutionData
+          })
+        let evoImage = ''
+        if (evolutionName) {
+          evoImage = await axios
+            .get(`https://pokeapi.co/api/v2/pokemon/${evolutionName}`)
+            .then((res) => {
+              return res.data.sprites.front_default
+            })
+            .catch(() => {
+              return null
+            })
+          evolutionName.image = evoImage
+        }
         return {
           id: response.data.id,
           name: response.data.name,
@@ -47,33 +78,8 @@ export default async function getAndFormatPokemonData(): Promise<
             }),
           image: response.data.sprites.front_default ?? 'No image available',
 
-          evolutions: await axios
-            .get(response.data.species.url)
-            .then(async (res) => {
-              const evolvesTo = res.data.chain?.evolves_to
-              if (evolvesTo && evolvesTo.length > 0) {
-                const evolutionDetails = evolvesTo[0]?.evolution_details
-                if (evolutionDetails && evolutionDetails.length > 0) {
-                  const trigger = evolutionDetails[0].trigger?.name
-                  const name = evolvesTo.at(-1)?.species?.name
-                  if (name) {
-                    const evoImage = await axios.get(
-                      `https://pokeapi.co/api/v2/pokemon/${name}`,
-                    )
-                    const resultImage = evoImage.data.sprites?.front_default
-                    return {
-                      name,
-                      trigger:
-                        trigger === 'level-up'
-                          ? `${response.data.name} evolves into ${name} when levels up`
-                          : `${response.data.name} evolves into ${name} using a stone`,
-                      image: resultImage,
-                    }
-                  }
-                }
-              }
-              return { name: 'none', trigger: 'none', image: 'none' }
-            }),
+          evolutions: evolutionName,
+
           genderRatio: await axios
             .get(response.data.species.url)
             .then((res) => {

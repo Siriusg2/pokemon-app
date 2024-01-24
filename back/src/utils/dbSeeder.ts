@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import axios, { AxiosResponse } from 'axios'
 import getAndFormatPokemonData from './getAndFormatPokemonData'
 import { PokemonDataToDb } from '../types/types'
-export default async function dbSeeder(prisma: PrismaClient): Promise<string> {
+export default async function dbSeeder(prisma: PrismaClient): Promise<void> {
   let typesUrl: string = 'https://pokeapi.co/api/v2/type/'
   let eggsUrl: string = 'https://pokeapi.co/api/v2/egg-group/'
   let abilitiesUrl: string =
@@ -59,24 +59,12 @@ export default async function dbSeeder(prisma: PrismaClient): Promise<string> {
               },
             })
           : null
-
-        // Si deseas también asociar el Pokémon a un equipo
-        // if (pokemon.teamId) {
-        //   await prisma.team.update({
-        //     where: { id: pokemon.teamId },
-        //     data: {
-        //       pokemons: {
-        //         connect: { id: createdPokemon.id },
-        //       },
-        //     },
-        //   })
-        // }
       }),
     )
-    return 'DB Seeded'
+    console.log('All pokemons seeded')
   } catch (error) {
     console.log(error)
 
-    return "Couldn't seed DB"
+    console.log('Seeding pokemons failed')
   }
 }
