@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express'
 import morgan from 'morgan'
 import { PrismaClient } from '@prisma/client'
 import router from './routes/index'
+import dbSeeder from './utils/dbSeeder'
 declare global {
   namespace Express {
     interface Request {
@@ -21,7 +22,9 @@ app.use((_req: Request, _res: Response, next: NextFunction) => {
 })
 app.use('/', router)
 app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`)
+  dbSeeder(prisma).then(() => {
+    console.log(`Server listening on ${PORT}`)
+  })
 })
 
 //closes Prisma connection when the app is stopped

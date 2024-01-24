@@ -1,2 +1,3 @@
 import { getAllPokemonController } from './pokemons/getPokemonController'
-export { getAllPokemonController }
+import { getPokemonImagesController } from './pokemons/getPokemonController'
+export { getAllPokemonController, getPokemonImagesController }

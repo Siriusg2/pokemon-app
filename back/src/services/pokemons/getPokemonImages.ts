@@ -1,16 +1,9 @@
 import axios, { AxiosResponse } from 'axios'
-import formatDecimetersToFeetAndInches from '../../utils/fromDecimetersToInches'
-import formatHectogramsToPounds from '../../utils/fromHectogramsToLbs'
-import formatGenderRatio from '../../utils/formatGenderRatio'
-export default async function getAllPokemons(page: number = 1) {
-  let pokeApirul: string = ''
-  if (page === 1) {
-    pokeApirul = 'https://pokeapi.co/api/v2/pokemon'
-  } else {
-    pokeApirul = `https://pokeapi.co/api/v2/pokemon?offset=${
-      page * 10
-    }&limit=20`
-  }
+
+export default async function getPokemonImages() {
+  let pokeApirul: string =
+    'https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000'
+
   const response: AxiosResponse<any> = await axios.get(`${pokeApirul}`)
 
   const pokemonsUrls = response.data.results.map((pokemon: any) => {
@@ -25,19 +18,19 @@ export default async function getAllPokemons(page: number = 1) {
         return {
           id: response.data.id,
           name: response.data.name,
-          height: formatDecimetersToFeetAndInches(response.data.height),
-          weight: formatHectogramsToPounds(response.data.weight),
+          height: response.data.height,
+          weight: response.data.weight,
           abilities: response.data.abilities.map((ability: any) => {
             return ability.ability.name
           }),
           mainAbilitieDescription: await axios
             .get(response.data.species.url)
             .then((res) => {
-              return res.data.flavor_text_entries.map((text: any) => {
+              return res.data.flavor_text_entries.find((text: any) => {
                 if (text.language.name === 'en') {
                   return text.flavor_text
                 }
-              })[0]
+              })
             }),
           frontImage: response.data.sprites.front_default,
           types: response.data.types.map((type: any) => {
@@ -71,7 +64,7 @@ export default async function getAllPokemons(page: number = 1) {
             .get(response.data.species.url)
             .then((res) => {
               let genderRate = res.data.gender_rate
-              return formatGenderRatio(genderRate)
+              return genderRate
             }),
         }
       }),

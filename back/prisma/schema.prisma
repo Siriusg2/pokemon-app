@@ -11,15 +11,17 @@ datasource db {
 }
 
 model Pokemon {
-  id        Int      @id @default(autoincrement())
-  types String[]
+  id        Int      @id 
+  name String
+  types  String[]  
   description String
   height Int
   weight Int
   genderRatio Int
-  abilities String[]
-  eggGropus String[]
-  evolutions String
+  abilities     String[] 
+  eggGroups     String[] 
+  evolutions Json
+  image String
   teamId    Int?  
   team      Team?    @relation(fields: [teamId], references: [id]) 
 }
@@ -28,4 +30,25 @@ model Team {
   id        Int      @id @default(autoincrement())
   name      String
   pokemons  Pokemon[] 
+}
+model Types {
+  id Int @id @default(autoincrement())
+  name String
+   
+}
+model Egg_groups {
+  id Int @id @default(autoincrement())
+  name String
+  
+}
+
+model Images {
+   id Int @id @default(autoincrement())
+  url String
+}
+
+model Abilities{
+    id Int @id @default(autoincrement())
+  name String
+ 
 }
