@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  client:
+    container_name: pokemon_app
+
+    restart: always
+    env_file: ./.env
+    ports:
+      - 3000:3000
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # dockerfile: Dockerfile.prod # Production
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+
+    networks:
+      - main
+
+networks:
+  main:
+    driver: bridge
+    external: true
