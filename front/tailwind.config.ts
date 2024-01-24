@@ -8,6 +8,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+      backgroundImage: { main: "url('./public/wallpaper.png')" },
     },
   },
   plugins: [],

@@ -6,7 +6,9 @@ import createTeamService from './teams/createTeamService'
 import getAllTeamsService from './teams/getAllTeamsService'
 import deleteTeamService from './teams/deleteTeamService'
 import updateTeamService from './teams/updateTeamService'
-
+import getAllEggGroupsService from './getAllEggGroups'
+import getAllTypesService from './getAllTypes'
+import getAllAbilitiesService from './getAllAbilities'
 export {
   getAllPokemonsService,
   createPokemonService,
@@ -16,4 +18,7 @@ export {
   getAllTeamsService,
   deleteTeamService,
   updateTeamService,
+  getAllEggGroupsService,
+  getAllTypesService,
+  getAllAbilitiesService,
 }
