@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 3000
 # Comando para ejecutar la aplicación
 
-CMD [ "pnpm", "dev"]
+CMD ["sh", "-c", "echo 'Waiting for 5 seconds for db container...' && sleep 5 && pnpm run dev"]

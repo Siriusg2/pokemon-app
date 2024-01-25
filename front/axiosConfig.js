@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL:
+    process.env.NEXT_PUBLIC_BASE_URL || "https://api_pokemon.gibsongil.store",
   timeout: 8000,
 });
 
