@@ -38,6 +38,12 @@ const Pokedex: React.FC<PokedexProps> = (): JSX.Element => {
           alt={randomPokemon?.name}
         />
       </div>
+      <div className="absolute left-[8rem] top-[30rem]">
+        <button className="font-bold">Search</button>
+      </div>
+      <div className="absolute left-[29.7rem] top-[30.3rem]">
+        <button className="font-bold">View More</button>
+      </div>
     </div>
   );
 };

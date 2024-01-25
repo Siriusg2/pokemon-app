@@ -20,7 +20,9 @@ export default function PokedexData(props: {
           </span>
         ))}
       </div>
-      <p className="text-left text-xs text-black">{description}</p>
+      <p className="overflow-scroll text-left text-xs text-black">
+        {description}
+      </p>
       <div className="flex flex-row space-x-24">
         <div className="flex flex-col">
           <h3 className="text-sm font-bold capitalize text-black">Height</h3>
