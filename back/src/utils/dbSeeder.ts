@@ -51,7 +51,7 @@ export default async function dbSeeder(prisma: PrismaClient): Promise<void> {
                 height: pokemon.height,
                 weight: pokemon.weight,
                 genderRatio: pokemon.genderRatio,
-                evolutions: pokemon.evolutions,
+                evolutions: JSON.stringify(pokemon.evolutions),
                 image: pokemon.image,
                 abilities: pokemon.abilities,
                 types: pokemon.types,

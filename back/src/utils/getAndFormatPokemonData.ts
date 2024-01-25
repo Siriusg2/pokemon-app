@@ -38,14 +38,15 @@ export default async function getAndFormatPokemonData(): Promise<
             return evolutionData
           })
         let evoImage = ''
-        if (evolutionName) {
+
+        if (evolutionName && evolutionName.name) {
           evoImage = await axios
-            .get(`https://pokeapi.co/api/v2/pokemon/${evolutionName}`)
+            .get(`https://pokeapi.co/api/v2/pokemon/${evolutionName.name}`)
             .then((res) => {
               return res.data.sprites.front_default
             })
             .catch(() => {
-              return null
+              return 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/113.png'
             })
           evolutionName.image = evoImage
         }

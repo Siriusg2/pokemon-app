@@ -4,6 +4,7 @@ import PokedexImage from "./PokedexImage";
 import { useStore } from "../../store/state";
 import formatDecimetersToFeetAndInches from "~/utils/fromDecimetersToInches";
 import formatHectogramsToPounds from "~/utils/fromHectogramsToLbs";
+import Link from "next/link";
 type PokedexProps = {
   image?: React.ReactNode;
   data?: React.ReactNode;
@@ -39,7 +40,9 @@ const Pokedex: React.FC<PokedexProps> = (): JSX.Element => {
         />
       </div>
       <div className="absolute left-[8rem] top-[30rem]">
-        <button className="font-bold">Search</button>
+        <Link href="/pokedex">
+          <button className="font-bold">Search</button>
+        </Link>
       </div>
       <div className="absolute left-[29.7rem] top-[30.3rem]">
         <button className="font-bold">View More</button>

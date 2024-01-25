@@ -10,12 +10,12 @@ export interface Pokemon {
   eggGroups: string[];
   evolutions: Evolutions;
   image: string;
-  teamId: null;
+  teamId: number | null;
 }
 
 export interface Evolutions {
   name: string;
-  image: null;
+  image: string;
   trigger: string;
 }
 

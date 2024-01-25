@@ -29,7 +29,6 @@ export default function Home(): JSX.Element {
   };
   useEffect(() => {
     fetchAllData();
-    console.log(pokemon);
   }, []);
 
   return (
@@ -39,7 +38,7 @@ export default function Home(): JSX.Element {
         <meta name="description" content="Condorsoft technical test" />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-[url('/wallpaper.png')]">
+      <main className="flex min-h-screen flex-col items-center justify-center ">
         <Pokedex />
       </main>
     </>
