@@ -1,29 +1,43 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { Pokemon, Ability, EggGroup, Type, Team } from "~/types/types";
+import { Store } from "~/types/store";
 
-interface AppState {
-  pokemons?: Pokemon[];
-  abilities?: Ability[];
-  types?: Type[];
-  eggGroups?: EggGroup[];
-  teams?: Team[];
-  setPokemons: (pokemons: Pokemon[]) => void;
-  setAbilities: (abilities: Ability[]) => void;
-  setTypes: (types: Type[]) => void;
-  setEggGroups: (eggGroups: EggGroup[]) => void;
-  setTeams: (teams: Team[]) => void;
-}
-
-export const useStore = create<AppState>((set) => ({
-  teams: [],
-  pokemons: [],
-  abilities: [],
-  types: [],
-  eggGroups: [],
-  setPokemons: (pokemons) => set({ pokemons }),
-  setAbilities: (abilities) => set({ abilities }),
-  setTypes: (types) => set({ types }),
-  setEggGroups: (eggGroups) => set({ eggGroups }),
-  setTeams: (teams) => set({ teams }),
-}));
+export const useStore = create<Store>()(
+  devtools((set) => ({
+    pokemon: [],
+    ability: [],
+    type: [],
+    eggGroup: [],
+    team: [],
+    setPokemon: (pokemon: Store["pokemon"]) => {
+      set((state) => ({
+        ...state,
+        pokemon,
+      }));
+    },
+    setAbility: (ability: Store["ability"]) => {
+      set((state) => ({
+        ...state,
+        ability,
+      }));
+    },
+    setTeam: (team: Store["team"]) => {
+      set((state) => ({
+        ...state,
+        team,
+      }));
+    },
+    setType: (type: Store["type"]) => {
+      set((state) => ({
+        ...state,
+        type,
+      }));
+    },
+    setEggGroup: (eggGroup: Store["eggGroup"]) => {
+      set((state) => ({
+        ...state,
+        eggGroup,
+      }));
+    },
+  })),
+);
